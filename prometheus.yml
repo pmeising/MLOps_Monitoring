@@ -1,24 +1,20 @@
 global:
   scrape_interval: 15s
-  evaluation_interval: 15s
-
-rule_files:
-  # - "first_rules.yml"
-  # - "second_rules.yml"
-
 scrape_configs:
-  - job_name: 'whisper-api'
-    static_configs:
-      - targets: ['host.docker.internal:8000']  # STT service
-    metrics_path: '/metrics'
-    scrape_interval: 5s
-
-  - job_name: 'kokoro-api'
-    static_configs:
-      - targets: ['host.docker.internal:8001']  # TTS service
-    metrics_path: '/metrics'
-    scrape_interval: 5s
-
-  - job_name: 'prometheus'
-    static_configs:
-      - targets: ['localhost:9090']
+- job_name: fastapi_services
+  static_configs:
+  - targets:
+    - localhost:8000
+    - localhost:8001
+    - localhost:8002
+- job_name: mlflow_training
+  static_configs:
+  - targets:
+    - localhost:8003
+  scrape_interval: 30s
+- job_name: mlflow_server
+  static_configs:
+  - targets:
+    - localhost:5000
+  metrics_path: /metrics
+  scrape_interval: 60s
