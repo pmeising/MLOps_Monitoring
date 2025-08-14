@@ -1,0 +1,7 @@
+endpoints:
+  - ip: 100.101.102.1
+    port: 8001
+    name: stt
+  - ip: 100.101.102.2
+    port: 8002
+    name: tts
