@@ -10,6 +10,43 @@ This monitoring stack provides centralized observability for your FastAPI servic
 - **Prometheus**: Metrics collection and storage
 - **Grafana**: Visualization and dashboards
 
+## Configuration Management
+
+### Dynamic Prometheus Configuration
+
+This monitoring stack includes a dynamic configuration system:
+
+1. **`endpoints.yaml`** - Define your service endpoints:
+```yaml
+endpoints:
+  - ip: localhost
+    port: 8000
+    name: liquidai
+    service_type: fastapi
+    description: "LiquidAI LFM2-350M Language Model"
+  - ip: localhost
+    port: 8001
+    name: whisper
+    service_type: fastapi
+    description: "Whisper Speech-to-Text"
+```
+
+2. **`generate_prometheus.py`** - Automatically generates `prometheus.yml`:
+```bash
+python generate_prometheus.py
+```
+
+### Service Types Supported:
+- **`fastapi`** - FastAPI services with `/metrics` endpoints
+- **`mlflow_server`** - MLFlow tracking server
+- **`mlflow_training`** - MLFlow training pipelines
+
+### Adding New Services:
+
+1. Add your service to `endpoints.yaml`
+2. Run `python generate_prometheus.py`
+3. Restart the monitoring stack
+
 ## Quick Start
 
 ### Prerequisites

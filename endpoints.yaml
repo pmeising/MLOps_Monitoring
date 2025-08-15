@@ -1,7 +1,29 @@
 endpoints:
-  - ip: localhost
+  # FastAPI AI Services
+  - ip: host.docker.internal
     port: 8000
-    name: stt
-  - ip: localhost
+    name: liquidai
+    service_type: fastapi
+    description: "LiquidAI LFM2-350M Language Model"
+  - ip: host.docker.internal 
     port: 8001
-    name: tts
+    name: whisper
+    service_type: fastapi
+    description: "Whisper Speech-to-Text"
+  - ip: host.docker.internal
+    port: 8002
+    name: kokoro
+    service_type: fastapi
+    description: "Kokoro Text-to-Speech"
+  
+  # MLFlow Services (examples)
+  - ip: host.docker.internal
+    port: 5000
+    name: mlflow_server
+    service_type: mlflow_server
+    description: "MLFlow Tracking Server"
+  - ip: host.docker.internal
+    port: 8003
+    name: mlflow_training
+    service_type: mlflow_training
+    description: "MLFlow Training Pipeline"
